@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Валидация email на jQuery</title>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="js/my-js.js"></script>
+
+</head>
+<body>
+<h2>Task #2</h2>
+<div id="registration" align="center">
+    <form method="post" action="#" id="form">
+        <p>
+            <input type="text" id="first-name" placeholder="First name"/>
+            <span id="name-check"></span>
+        </p>
+        <p>
+            <input type="text" id="last-name" placeholder="Last name"/>
+            <span id="last-name-check"></span>
+        </p>
+        <p>
+            <input type="text" id="email" placeholder="Email" required/>
+            <span id="valid-email">*</span>
+        </p>
+        <p>
+            <select id = "days"> </select> <select id = "months"> </select> <select id = "years"> </select>
+        <p>
+            <input type="text" id="password" placeholder="Password" required/>
+            <span id="valid-password">*</span>
+        </p>
+        <p>
+            <input type="text" id="password2" placeholder="Confirm password" required/>
+            <span id="valid-password2">*</span>
+        </p>
+        <p>
+
+        </p>
+       <p>
+        <input type="button" value="Sign up" id="button-check"></button>
+       </p>
+    </form>
+</div>
+<div id="login" align="center" style="display: none">
+    <h2>Please, sign in!</h2>
+    <p>
+        <input type="text" id="email-login" placeholder="Email" required/>
+        <input type="text" id="password-login" placeholder="Password" required/>
+    </p>
+    <p>
+        <input type="button" value="Sign in" id="button-signin"></button>
+    </p>
+</div>
+<div id="user-data" align="center" style="display: none">
+    <h2>User information</h2>
+    <div id="user-information">
+
+    </div>
+</div>
+</body>
+</html>

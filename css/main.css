@@ -1,0 +1,15 @@
+.acceptEmail {
+     border: 1px solid #569b44;
+ }
+
+.wrongEmail {
+    border: 1px solid #ff0000;
+}
+
+.acceptPassword {
+    border: 1px solid #569b44;
+}
+
+.wrongPassword {
+    border: 1px solid #ff0000;
+}
