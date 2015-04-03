@@ -77,7 +77,7 @@ $(document).ready(function() {
             for (var i = 0; i < localStorage.length; i++) {
                 console.log(localStorage.getItem(localStorage.key(i))); // проверочка в консоли. порядок он сам выбирает, это не побороть
             }
-           // localStorage.clear(); // чтобы не забивалось фигней )
+            // localStorage.clear(); // чтобы не забивалось фигней )
             $('#registration').fadeOut(2000);
             $('#login').fadeIn(2000);
         } else {
@@ -104,10 +104,10 @@ $(document).ready(function() {
     }); // Наполняем месяца
 
     /*injectSelect(document.getElementById("months"), {
-        jan:"Январь", feb:"Февраль", mar:"Март", apr:"Апрель",
-        may:"Май", jun:"Июнь", jul:"Июль", avg:"Август",
-        sep:"Сентябрь", okt:"Октябрь", nov:"Ноябрь", dec:"Декабрь"
-    }); // Наполняем месяца*/
+     jan:"Январь", feb:"Февраль", mar:"Март", apr:"Апрель",
+     may:"Май", jun:"Июнь", jul:"Июль", avg:"Август",
+     sep:"Сентябрь", okt:"Октябрь", nov:"Ноябрь", dec:"Декабрь"
+     }); // Наполняем месяца*/
     injectSelect(document.getElementById("years"), makeNumbersObject(1920, 2015)); // Наполняем года
     injectSelect(document.getElementById("days"), makeNumbersObject(1, 31));// Наполняем дни
 
