@@ -28,11 +28,11 @@
         <p>
             <select id = "days"> </select> <select id = "months"> </select> <select id = "years"> </select>
         <p>
-            <input type="text" id="password" placeholder="Password" required/>
+            <input type="password" id="password" placeholder="Password" required/>
             <span id="valid-password">*</span>
         </p>
         <p>
-            <input type="text" id="password2" placeholder="Confirm password" required/>
+            <input type="password" id="password2" placeholder="Confirm password" required/>
             <span id="valid-password2">*</span>
         </p>
         <p>
@@ -47,7 +47,7 @@
     <h2>Please, sign in!</h2>
     <p>
         <input type="text" id="email-login" placeholder="Email" required/>
-        <input type="text" id="password-login" placeholder="Password" required/>
+        <input type="password" id="password-login" placeholder="Password" required/>
     </p>
     <p>
         <input type="button" value="Sign in" id="button-signin"></button>
@@ -56,6 +56,13 @@
 <div id="user-data" align="center" style="display: none">
     <h2>User information</h2>
     <div id="user-information">
+
+    </div>
+
+    <p>
+        <input type="button" value="Load JSON" id="json-example"></button>
+    </p>
+    <div id="json-loaded">
 
     </div>
 </div>

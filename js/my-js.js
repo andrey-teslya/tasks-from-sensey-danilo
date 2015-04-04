@@ -93,6 +93,17 @@ $(document).ready(function() {
                 user1.printUserToHTML();
             }
         });
+        $('#json-example').click(function() {
+            $.ajax({
+                url: "https://dl.dropboxusercontent.com/u/26060640/data.json",
+                success: function (data) {
+                    var jsonExmpl = document.getElementById("json-loaded");
+                    var p = document.createElement("p");
+                    p.innerHTML = data;
+                    jsonExmpl.appendChild(p);
+                }
+            })
+        });
     });
 
 
@@ -103,11 +114,6 @@ $(document).ready(function() {
         8:"Сентябрь", 9:"Октябрь", 10:"Ноябрь", 11:"Декабрь"
     }); // Наполняем месяца
 
-    /*injectSelect(document.getElementById("months"), {
-     jan:"Январь", feb:"Февраль", mar:"Март", apr:"Апрель",
-     may:"Май", jun:"Июнь", jul:"Июль", avg:"Август",
-     sep:"Сентябрь", okt:"Октябрь", nov:"Ноябрь", dec:"Декабрь"
-     }); // Наполняем месяца*/
     injectSelect(document.getElementById("years"), makeNumbersObject(1920, 2015)); // Наполняем года
     injectSelect(document.getElementById("days"), makeNumbersObject(1, 31));// Наполняем дни
 
