@@ -25,9 +25,12 @@
             <input type="text" id="email" placeholder="Email" required/>
             <span id="valid-email">*</span>
         </p>
+        <p class="notDisplayed">
+            <select id="days"> </select> <select id="months"> </select> <select id ="years"> </select>
         <p>
-            <select id = "days"> </select> <select id = "months"> </select> <select id = "years"> </select>
         <p>
+            <input type="date" id="birthday">
+        </p>
             <input type="password" id="password" placeholder="Password" required/>
             <span id="valid-password">*</span>
         </p>
@@ -35,32 +38,30 @@
             <input type="password" id="password2" placeholder="Confirm password" required/>
             <span id="valid-password2">*</span>
         </p>
-        <p>
 
-        </p>
        <p>
-        <input type="button" value="Sign up" id="button-check"></button>
+        <input type="button" value="Sign up" id="button-check">
        </p>
     </form>
 </div>
-<div id="login" align="center" style="display: none">
+<div id="login" align="center" class="notDisplayed">
     <h2>Please, sign in!</h2>
     <p>
         <input type="text" id="email-login" placeholder="Email" required/>
         <input type="password" id="password-login" placeholder="Password" required/>
     </p>
     <p>
-        <input type="button" value="Sign in" id="button-signin"></button>
+        <input type="button" value="Sign in" id="button-signin">
     </p>
 </div>
-<div id="user-data" align="center" style="display: none">
+<div id="user-data" align="center" class="notDisplayed">
     <h2>User information</h2>
     <div id="user-information">
 
     </div>
 
     <p>
-        <input type="button" value="Load JSON" id="json-example"></button>
+        <input type="button" value="Load JSON" id="json-example">
     </p>
     <div id="json-loaded">
 

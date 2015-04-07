@@ -13,3 +13,7 @@
 .wrongPassword {
     border: 1px solid #ff0000;
 }
+
+.notDisplayed {
+    display: none;
+}

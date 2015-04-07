@@ -3,6 +3,12 @@ $(document).ready(function() {
     var emailElement = $("#email");
     var passElement = $("#password");
     var passElement2 = $("#password2");
+    var firstNameElement = $("#first-name");
+    var lastNameElement = $("#last-name");
+    var yearsElement = $("#years");
+    var monthsElement = $("#months");
+    var daysElement = $("#days");
+    var birthdayElement = $("#birthday");
 
     $('#button-check').click(function() {
 
@@ -53,24 +59,23 @@ $(document).ready(function() {
         }
 
         if(pattern.test(emailElement.val()) && pattern2.test(passElement.val()) && (passElement.val() === passElement2.val())) {
-            //console.log($("#first-name").val());
-            localStorage.setItem("first-name", $("#first-name").val());
+
+           /* localStorage.setItem("first-name", $("#first-name").val());
             localStorage.setItem("last-name", $("#last-name").val());
             localStorage.setItem("email", emailElement.val());
             localStorage.setItem("password", passElement.val());
             localStorage.setItem("days", $("#days").val());
             localStorage.setItem("months", $("#months").val());
-            localStorage.setItem("years", $("#years").val());
-
-            //var user = new userInfo(emailElement.val(), $("#first-name").val(), $("#last-name").val(), passElement.val(), new Date($("#years").val(), $("#months").val(), $("#days").val()));
+            localStorage.setItem("years", $("#years").val());*/
             var user = {};
-            user.firstName = $("#first-name").val();
-            user.lastName = $("#last-name").val();
+            user.firstName = firstNameElement.val();
+            user.lastName = lastNameElement.val();
             user.email = emailElement.val();
             user.password = passElement.val();
-            user.birthday = new Date(Date.UTC($("#years").val(), $("#months").val(), $("#days").val()));
+            //user.birthday = new Date(Date.UTC(yearsElement.val(), monthsElement.val(), daysElement.val()));
+            user.birthday = convertToDate(birthdayElement);
 
-            //console.log(userInfo.firstName, userInfo.lastName, userInfo.password, userInfo.birthday);
+            //console.log(convertToDate(birthdayElement).toUTCString());
 
             localStorage.setItem("user", JSON.stringify(user));
 
@@ -88,8 +93,8 @@ $(document).ready(function() {
                 //console.log("True");
                 $('#login').fadeOut(2000);
                 $('#user-data').fadeIn(2000);
-                //printLS(document.getElementById("user-information"))
-                var user1 = new userInfo(JSON.parse(localStorage.getItem("user")));
+
+                var user1 = new UserInfo(JSON.parse(localStorage.getItem("user")));
                 user1.printUserToHTML();
             }
         });
@@ -97,16 +102,18 @@ $(document).ready(function() {
             $.ajax({
                 url: "https://dl.dropboxusercontent.com/u/26060640/data.json",
                 success: function (data) {
-                    var jsonExmpl = document.getElementById("json-loaded");
-                    var p = document.createElement("p");
-                    p.innerHTML = data;
-                    jsonExmpl.appendChild(p);
+                    var jsonExample, pElem;
+                    jsonExample = document.getElementById("json-loaded");
+                    pElem = document.createElement("p");
+                    pElem.innerHTML = data;
+                    jsonExample.appendChild(pElem);
+                },
+                error: function () {
+                    window.alert("Sorry, but JSON data is cannot be loaded.");
                 }
             })
         });
     });
-
-
 
     injectSelect(document.getElementById("months"), {
         0:"Январь", 1:"Февраль", 2:"Март", 3:"Апрель",
@@ -117,35 +124,46 @@ $(document).ready(function() {
     injectSelect(document.getElementById("years"), makeNumbersObject(1920, 2015)); // Наполняем года
     injectSelect(document.getElementById("days"), makeNumbersObject(1, 31));// Наполняем дни
 
-
 });
 
-function userInfo(usrObj) {
+function convertToDate(dateElement) {
+    var year, month, day;
+
+    year = Number(dateElement.val().slice(0, 4));
+    month = Number(dateElement.val().slice(5, 7));
+    day = Number(dateElement.val().slice(8, 10));
+
+    return new Date(Date.UTC(year, month, day));
+}
+
+function UserInfo(usrObj) {
     this.firstName = usrObj.firstName;
     this.lastName = usrObj.lastName;
     this.email = usrObj.email;
     this.password = usrObj.password;
     this.birthday = usrObj.birthday;
 
-    userInfo.prototype.printUserToHTML = function() {
+    UserInfo.prototype.printUserToHTML = function() {
 
-        var usrInf = document.getElementById("user-information");
+        var usrInf, firstName, lastName, email, birthday;
 
-        var fn = document.createElement("p");
-        fn.innerHTML = "First name: " + this.firstName;
-        usrInf.appendChild(fn);
+        usrInf = document.getElementById("user-information");
 
-        var ln = document.createElement("p");
-        ln.innerHTML = "Last name: " + this.lastName;
-        usrInf.appendChild(ln);
+        firstName = document.createElement("p");
+        firstName.innerHTML = "First name: " + this.firstName;
+        usrInf.appendChild(firstName);
 
-        var em = document.createElement("p");
-        em.innerHTML = "Email: " + this.email;
-        usrInf.appendChild(em);
+        lastName = document.createElement("p");
+        lastName.innerHTML = "Last name: " + this.lastName;
+        usrInf.appendChild(lastName);
 
-        var bday = document.createElement("p");
-        bday.innerHTML = "Birthday: " + new Date(this.birthday).toUTCString();
-        usrInf.appendChild(bday);
+        email = document.createElement("p");
+        email.innerHTML = "Email: " + this.email;
+        usrInf.appendChild(email);
+
+        birthday = document.createElement("p");
+        birthday.innerHTML = "Birthday: " + new Date(this.birthday).toUTCString();
+        usrInf.appendChild(birthday);
     }
 }
 
