@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
 <head>
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Валидация email на jQuery</title>
     <link rel="stylesheet" type="text/css" href="css/main.css">
-    <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
-    <script type="text/javascript" src="js/my-js.js"></script>
+
 
 </head>
 <body>
@@ -14,7 +13,7 @@
 <div id="registration" align="center">
     <form method="post" action="#" id="form">
         <p>
-            <input type="text" id="first-name" placeholder="First name"/>
+            <input type="text" id="first-name" placeholder="First name" autofocus/>
             <span id="name-check"></span>
         </p>
         <p>
@@ -54,18 +53,20 @@
         <input type="button" value="Sign in" id="button-signin">
     </p>
 </div>
-<div id="user-data" align="center" class="notDisplayed">
+<!--<div id="user-data" align="center" class="notDisplayed"> -->
+<div id="user-data" align="center" >
     <h2>User information</h2>
     <div id="user-information">
 
     </div>
+</div>
+<center><input type="button" value="Load JSON" id="json-example"></center>
+<div id="json-loaded">
 
-    <p>
-        <input type="button" value="Load JSON" id="json-example">
-    </p>
-    <div id="json-loaded">
-
-    </div>
 </div>
 </body>
+
+<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="js/my-js.js"></script>
+
 </html>

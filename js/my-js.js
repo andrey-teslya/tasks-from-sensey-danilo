@@ -98,21 +98,25 @@ $(document).ready(function() {
                 user1.printUserToHTML();
             }
         });
-        $('#json-example').click(function() {
-            $.ajax({
-                url: "https://dl.dropboxusercontent.com/u/26060640/data.json",
-                success: function (data) {
-                    var jsonExample, pElem;
-                    jsonExample = document.getElementById("json-loaded");
-                    pElem = document.createElement("p");
-                    pElem.innerHTML = data;
-                    jsonExample.appendChild(pElem);
-                },
-                error: function () {
-                    window.alert("Sorry, but JSON data is cannot be loaded.");
+
+    });
+
+    $('#json-example').click(function() {
+        $.ajax({
+            url: "https://dl.dropboxusercontent.com/u/26060640/data.json",
+            success: function (data) {
+                var jsonData;
+
+                jsonData = JSON.parse(data);
+
+                for(var i= 0, k = jsonData.length; i < k; i++) {
+                    $('#json-loaded').append(createHTMLfromJSON(jsonData[i]));
                 }
-            })
-        });
+            },
+            error: function () {
+                window.alert("Sorry, but JSON data is cannot be loaded.");
+            }
+        })
     });
 
     injectSelect(document.getElementById("months"), {
@@ -123,8 +127,32 @@ $(document).ready(function() {
 
     injectSelect(document.getElementById("years"), makeNumbersObject(1920, 2015)); // Наполняем года
     injectSelect(document.getElementById("days"), makeNumbersObject(1, 31));// Наполняем дни
-
 });
+
+function createHTMLfromJSON(userObj) {
+
+    var imgElem = '<div class="float-left"><img src="' + userObj.picture + '"></div>';
+    var otherInfo = '<div class="float-left" class="other-info">';
+    var tags = '';
+
+    otherInfo += '<b>Name: </b>'+ userObj.name + '<br>';
+    otherInfo += '<b>Age: </b>' + userObj.age + '<br>';
+    otherInfo += '<b>Gender: </b>' + userObj.gender + '<br>';
+    otherInfo += '<b>Company: </b>' + userObj.company + '<br>';
+    otherInfo += '<b>Phone: </b>' + userObj.phone + '<br>';
+    //console.log(userObj.tags);
+
+    for (var i = 0, k = userObj.tags.length; i < k; i++) {
+        if (i !== (k - 1)) {
+            tags += userObj.tags[i] + ', ';
+        } else {
+            tags += userObj.tags[i] + '<br></div>';
+            //console.log(tags);
+        }
+    }
+
+    return '<div class="inline-block">' + imgElem + otherInfo  + tags + '</div>';
+}
 
 function convertToDate(dateElement) {
     var year, month, day;

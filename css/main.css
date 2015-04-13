@@ -1,3 +1,31 @@
+body {
+    display: inline;
+}
+
+div {
+    display: inline;
+}
+
+.other-info {
+    margin: 10px;
+}
+
+.inline-block {
+    display: inline-block;
+    width: 600px;
+}
+
+img {
+    float: left;
+    width: 128px;
+    height: 128px;
+    padding: 0 10px;
+}
+
+.float-left {
+    float: left;
+}
+
 .acceptEmail {
      border: 1px solid #569b44;
  }
@@ -16,4 +44,12 @@
 
 .notDisplayed {
     display: none;
+}
+
+.article{
+    width:100px;
+    height:100px;
+    background:#333;
+    float:left;
+    margin:5px;
 }
