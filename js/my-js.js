@@ -15,19 +15,16 @@ $(document).ready(function() {
         if(emailElement.val() !== '') {
             var pattern = /^([a-z0-9_\.-])+@[a-z0-9-]+\.([a-z]{2,4}\.)?[a-z]{2,4}$/i;
             if(pattern.test(emailElement.val())){
-                //emailElement.css({'border' : '1px solid #569b44'});
                 emailElement.removeClass();
                 emailElement.addClass('acceptEmail');
                 $('#valid-email').text('Верно');
             } else {
-                //emailElement.css({'border' : '1px solid #ff0000'}
                 emailElement.removeClass();
                 emailElement.addClass('wrongEmail');
                 $('#valid-email').text('Не верно');
                 //return false;
             }
         } else {
-            // emailElement.css({'border' : '1px solid #ff0000'});
             emailElement.removeClass();
             emailElement.addClass('wrongEmail');
             $('#valid-email').text('Поле email не должно быть пустым');
@@ -35,24 +32,20 @@ $(document).ready(function() {
 
         var pattern2 = /^(?=.*[0-9])(?=.*[A-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,}$/;
         if (pattern2.test(passElement.val())) {
-            //passElement.css({'border': '1px solid #569b44'});
             passElement.removeClass();
             passElement.addClass('acceptPassword');
             $('#valid-password').text('Верно');
         } else {
-            //passElement.css({'border': '1px solid #ff0000'});
             passElement.removeClass();
             passElement.addClass('wrongPassword');
             $('#valid-password').text('Поле password должно быть не меньше 6 символов, обязательно должна быть большая буква, цифра и спец.символ');
         }
 
         if (passElement.val() !== passElement2.val()) {
-            //passElement2.css({'border': '1px solid #ff0000'});
             passElement2.removeClass();
             passElement2.addClass('wrongPassword');
             $('#valid-password2').text('Поле не совпадает с полем password');
         } else {
-            //passElement2.css({'border': '1px solid #569b44'});
             passElement2.removeClass();
             passElement2.addClass('acceptPassword');
             $('#valid-password2').text('Верно');
@@ -60,13 +53,6 @@ $(document).ready(function() {
 
         if(pattern.test(emailElement.val()) && pattern2.test(passElement.val()) && (passElement.val() === passElement2.val())) {
 
-           /* localStorage.setItem("first-name", $("#first-name").val());
-            localStorage.setItem("last-name", $("#last-name").val());
-            localStorage.setItem("email", emailElement.val());
-            localStorage.setItem("password", passElement.val());
-            localStorage.setItem("days", $("#days").val());
-            localStorage.setItem("months", $("#months").val());
-            localStorage.setItem("years", $("#years").val());*/
             var user = {};
             user.firstName = firstNameElement.val();
             user.lastName = lastNameElement.val();
@@ -140,16 +126,9 @@ function createHTMLfromJSON(userObj) {
     otherInfo += '<b>Gender: </b>' + userObj.gender + '<br>';
     otherInfo += '<b>Company: </b>' + userObj.company + '<br>';
     otherInfo += '<b>Phone: </b>' + userObj.phone + '<br>';
-    //console.log(userObj.tags);
+    //console.log(userObj.tags.join());
 
-    for (var i = 0, k = userObj.tags.length; i < k; i++) {
-        if (i !== (k - 1)) {
-            tags += userObj.tags[i] + ', ';
-        } else {
-            tags += userObj.tags[i] + '<br></div>';
-            //console.log(tags);
-        }
-    }
+    tags = userObj.tags.join(', ') + '<br></div>';
 
     return '<div class="inline-block">' + imgElem + otherInfo  + tags + '</div>';
 }
