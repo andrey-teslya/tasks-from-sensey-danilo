@@ -91,13 +91,17 @@ $(document).ready(function() {
         $.ajax({
             url: "https://dl.dropboxusercontent.com/u/26060640/data.json",
             success: function (data) {
-                var jsonData;
+                var jsonData, jsonElement, appendData;
 
                 jsonData = JSON.parse(data);
+                jsonElement = $('#json-loaded');
+                appendData = '';
 
                 for(var i= 0, k = jsonData.length; i < k; i++) {
-                    $('#json-loaded').append(createHTMLfromJSON(jsonData[i]));
+                    //jsonElement.append(createHTMLfromJSON(jsonData[i]));
+                    appendData +=  createHTMLfromJSON(jsonData[i]);
                 }
+                jsonElement.append(appendData);
             },
             error: function () {
                 window.alert("Sorry, but JSON data is cannot be loaded.");
@@ -121,16 +125,34 @@ function createHTMLfromJSON(userObj) {
     var otherInfo = '<div class="float-left" class="other-info">';
     var tags = '';
 
-    otherInfo += '<b>Name: </b>'+ userObj.name + '<br>';
-    otherInfo += '<b>Age: </b>' + userObj.age + '<br>';
-    otherInfo += '<b>Gender: </b>' + userObj.gender + '<br>';
-    otherInfo += '<b>Company: </b>' + userObj.company + '<br>';
-    otherInfo += '<b>Phone: </b>' + userObj.phone + '<br>';
+    //otherInfo += '<b>Name: </b>'+ userObj.name + '<br>';
+    otherInfo += '<b>Name: </b>'+ checkExisting(userObj, 'name') + '<br>';
+    //otherInfo += '<b>Age: </b>' + userObj.age + '<br>';
+    otherInfo += '<b>Age: </b>' + checkExisting(userObj, 'age') + '<br>';
+    //otherInfo += '<b>Gender: </b>' + userObj.gender + '<br>';
+    otherInfo += '<b>Gender: </b>' + checkExisting(userObj, 'gender') + '<br>';
+    //otherInfo += '<b>Company: </b>' + userObj.company + '<br>';
+    otherInfo += '<b>Company: </b>' + checkExisting(userObj, 'company') + '<br>';
+    //otherInfo += '<b>Phone: </b>' + userObj.phone + '<br>';
+    otherInfo += '<b>Phone: </b>' + checkExisting(userObj, 'phone') + '<br>';
     //console.log(userObj.tags.join());
 
-    tags = userObj.tags.join(', ') + '<br></div>';
+    if(checkExisting(userObj, 'tags') != 'Not found')
+    {
+        tags = userObj['tags'].join(', ') + '<br></div>';
+    } else {
+        tags += 'Tags are not found <br></div>';
+    }
 
     return '<div class="inline-block">' + imgElem + otherInfo  + tags + '</div>';
+}
+
+function checkExisting(obj, key) {
+    if(!obj.hasOwnProperty(key)) {
+        return 'Not found';
+    } else {
+        return obj[key];
+    }
 }
 
 function convertToDate(dateElement) {
