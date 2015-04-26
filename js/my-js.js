@@ -102,6 +102,8 @@ $(document).ready(function() {
                     appendData +=  createHTMLfromJSON(jsonData[i]);
                 }
                 jsonElement.append(appendData);
+
+                searching(jsonData, jsonElement);
             },
             error: function () {
                 window.alert("Sorry, but JSON data is cannot be loaded.");
@@ -114,10 +116,35 @@ $(document).ready(function() {
         4:"Май", 5:"Июнь", 6:"Июль", 7:"Август",
         8:"Сентябрь", 9:"Октябрь", 10:"Ноябрь", 11:"Декабрь"
     }); // Наполняем месяца
-
     injectSelect(document.getElementById("years"), makeNumbersObject(1920, 2015)); // Наполняем года
     injectSelect(document.getElementById("days"), makeNumbersObject(1, 31));// Наполняем дни
 });
+
+function searching(jsonData, appendElem) {
+    $('#search').click(function() {
+        var searchElement = $('#search-text');
+
+        $('#json-loaded > div').fadeOut(2000);
+
+        for(var i= 0, k = jsonData.length; i < k; i++) {
+            if(isSearchingHasMatches(jsonData[i], searchElement.val())) {
+                appendElem.append(createHTMLfromJSON(jsonData[i]));
+            }
+        }
+    })
+}
+
+function isSearchingHasMatches(jsonObj, search) {
+
+    for (var x in jsonObj) {
+        if (typeof(jsonObj[x]) === 'object') {
+            return isSearchingHasMatches(jsonObj[x], search)
+        } else {
+            console.log(jsonObj[x]);
+            if(String(jsonObj[x]).search(search) !== -1) return true;
+        }
+    }
+}
 
 function createHTMLfromJSON(userObj) {
 
