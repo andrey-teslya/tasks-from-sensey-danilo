@@ -104,6 +104,7 @@ $(document).ready(function() {
                 jsonElement.append(appendData);
 
                 searching(jsonData, jsonElement);
+                masonryTest();
             },
             error: function () {
                 window.alert("Sorry, but JSON data is cannot be loaded.");
@@ -121,17 +122,32 @@ $(document).ready(function() {
 });
 
 function searching(jsonData, appendElem) {
-    $('#search').click(function() {
-        var searchElement = $('#search-text');
+    var searchElement = $('#search-text');
+    var result = '';
 
-        $('#json-loaded > div').fadeOut(2000);
+    $('#search').click(function() {
+
+        $('#json-loaded > div').fadeOut(2000, function() { $(this).remove(); } );
 
         for(var i= 0, k = jsonData.length; i < k; i++) {
             if(isSearchingHasMatches(jsonData[i], searchElement.val())) {
-                appendElem.append(createHTMLfromJSON(jsonData[i]));
+                //appendElem.append(createHTMLfromJSON(jsonData[i]));
+                result += createHTMLfromJSON(jsonData[i]);
             }
         }
+
+        appendElem.append(result);
+        result = '';
     })
+}
+
+function masonryTest() {
+    var container = document.getElementById('json-loaded');
+    var msnry = new Masonry(container, {
+        columnWidth: 175,
+        gutter: 10,
+        itemSelector: '.inline-block'
+    });
 }
 
 function isSearchingHasMatches(jsonObj, search) {
@@ -140,7 +156,7 @@ function isSearchingHasMatches(jsonObj, search) {
         if (typeof(jsonObj[x]) === 'object') {
             return isSearchingHasMatches(jsonObj[x], search)
         } else {
-            console.log(jsonObj[x]);
+            //console.log(jsonObj[x]);
             if(String(jsonObj[x]).search(search) !== -1) return true;
         }
     }

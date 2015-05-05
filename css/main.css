@@ -2,17 +2,13 @@ body {
     display: inline;
 }
 
-div {
-    display: inline;
-}
-
 .other-info {
     margin: 10px;
 }
 
 .inline-block {
     display: inline-block;
-    width: 600px;
+    margin-bottom: 10px;
 }
 
 img {
