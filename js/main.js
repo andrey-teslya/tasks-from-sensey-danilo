@@ -150,18 +150,6 @@ function masonryTest() {
     });
 }
 
-function isSearchingHasMatches(jsonObj, search) {
-
-    for (var x in jsonObj) {
-        if (typeof(jsonObj[x]) === 'object') {
-            return isSearchingHasMatches(jsonObj[x], search)
-        } else {
-            //console.log(jsonObj[x]);
-            if(String(jsonObj[x]).search(search) !== -1) return true;
-        }
-    }
-}
-
 function createHTMLfromJSON(userObj) {
 
     var imgElem = '<div class="float-left"><img src="' + userObj.picture + '"></div>';
@@ -190,95 +178,6 @@ function createHTMLfromJSON(userObj) {
     return '<div class="inline-block">' + imgElem + otherInfo  + tags + '</div>';
 }
 
-function checkExisting(obj, key) {
-    if(!obj.hasOwnProperty(key)) {
-        return 'Not found';
-    } else {
-        return obj[key];
-    }
-}
 
-function convertToDate(dateElement) {
-    var year, month, day;
 
-    year = Number(dateElement.val().slice(0, 4));
-    month = Number(dateElement.val().slice(5, 7));
-    day = Number(dateElement.val().slice(8, 10));
 
-    return new Date(Date.UTC(year, month, day));
-}
-
-function UserInfo(usrObj) {
-    this.firstName = usrObj.firstName;
-    this.lastName = usrObj.lastName;
-    this.email = usrObj.email;
-    this.password = usrObj.password;
-    this.birthday = usrObj.birthday;
-
-    UserInfo.prototype.printUserToHTML = function() {
-
-        var usrInf, firstName, lastName, email, birthday;
-
-        usrInf = document.getElementById("user-information");
-
-        firstName = document.createElement("p");
-        firstName.innerHTML = "First name: " + this.firstName;
-        usrInf.appendChild(firstName);
-
-        lastName = document.createElement("p");
-        lastName.innerHTML = "Last name: " + this.lastName;
-        usrInf.appendChild(lastName);
-
-        email = document.createElement("p");
-        email.innerHTML = "Email: " + this.email;
-        usrInf.appendChild(email);
-
-        birthday = document.createElement("p");
-        birthday.innerHTML = "Birthday: " + new Date(this.birthday).toUTCString();
-        usrInf.appendChild(birthday);
-    }
-}
-
-function printLS (obj) {
-    var opt;
-    obj.innerHTML = "";
-    for (var i = 0; i < localStorage.length; i++) {
-        opt = document.createElement("p");
-        opt.value = localStorage.key(i);
-        opt.innerHTML = opt.value + ": " + localStorage.getItem(localStorage.key(i));
-        obj.appendChild(opt);
-    }
-}
-
-/*
- Функция injectSelect принимает объект select и ассоциативный массив.
- Select очищается, затем в него добавляются элементы option,
- значение которых устанавливают ключи массива, а текст — значения массива.
- Ничего не возвращает.
- */
-function injectSelect (sel, rowsObject) {
-    var opt, x;
-    sel.innerHTML = "";
-    for (x in rowsObject) {
-        opt = document.createElement("option");
-        opt.value = x;
-        opt.innerHTML = rowsObject[x];
-        sel.appendChild(opt);
-    }
-}
-/*
- Функция makeNumbersObject принимает два числа. Возвращает ассоциативный массив
- ряда чисел от меньшего к большему, включительно.
- */
-function makeNumbersObject (from, to) {
-    var result = {}, x;
-    if(from > to) { // Если from меньше to, поменять их значения друг на друга.
-        var z = from;
-        from = to;
-        to = z;
-    }
-    for (x = from; x <= to; x++) {
-        result[x] = x;
-    }
-    return result
-}
